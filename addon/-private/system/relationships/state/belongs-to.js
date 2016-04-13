@@ -31,6 +31,9 @@ BelongsToRelationship.prototype.setRecord = function(newRecord) {
 };
 
 BelongsToRelationship.prototype.setCanonicalRecord = function(newRecord) {
+  if(newRecord === null && this.inverseRecord !== this.canonicalMembers.list[0]) {
+    this.inverseRecord = this.canonicalMembers.list[0];
+  }
   if (newRecord) {
     this.addCanonicalRecord(newRecord);
   } else if (this.inverseRecord) {
