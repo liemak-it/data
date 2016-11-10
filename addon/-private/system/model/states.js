@@ -175,10 +175,10 @@ var get = Ember.get;
 */
 
 function didSetProperty(internalModel, context) {
-  if (context.value === context.originalValue) {
+  if (Ember.compare(context.value, context.originalValue) === 0) {
     delete internalModel._attributes[context.name];
     internalModel.send('propertyWasReset', context.name);
-  } else if (context.value !== context.oldValue) {
+  } else if (Ember.compare(context.value, context.oldValue) !== 0) {
     internalModel.send('becomeDirty');
   }
 
